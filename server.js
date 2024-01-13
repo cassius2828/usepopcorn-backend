@@ -1,13 +1,17 @@
 import express from "express";
-import bcrypt from 'bcryptjs';
+import bcrypt from "bcryptjs";
 import cors from "cors";
 import knex from "knex";
+import dotenv from "dotenv";
 
 import handleRegister from "./controllers/register.js";
 import handleSignIn from "./controllers/signin.js";
 import handleProfileID from "./controllers/profileID.js";
+import searchMovies from './controllers/searchMovies.js'
+
 
 // import axios from "axios";
+dotenv.config();
 
 const db = knex({
   client: "pg",
@@ -19,8 +23,6 @@ const db = knex({
     database: "usepopcorn",
   },
 });
-
-
 
 // * EXPRESS SETUP
 const app = express();
@@ -34,7 +36,6 @@ app.get("/", (req, res) => {
 
 // * SIGN IN
 app.post("/signin", (req, res) => {
-  // res.json('sign in function here')
   handleSignIn(req, res, bcrypt, db);
 });
 
@@ -48,33 +49,15 @@ app.get("/profile/:id", (req, res) => {
   handleProfileID(req, res, db);
 });
 
+// * SEARCH MOVIE API CALL
+app.post('/search_movies', (req,res) => {
+searchMovies(req,res);
+})
+
 // * RUN SERVER
-app.listen(3000, () => {
-  console.log("app is running on port 3000");
+app.listen(process.env.PORT, () => {
+  console.log(`app is running on port ${process.env.PORT}`);
 });
 
 // /////////////////////////////////////////
 
-// TEST NBA API
-// const axios = require("axios");
-const season = "2017";
-
-// const fetchNBAData = async () => {
-//   const options = {
-//     method: "GET",
-//     url: `https://api-nba-v1.p.rapidapi.com/seasons`,
-//     headers: {
-//       "X-RapidAPI-Key": "7f369f5fa5msh21483b52a488f55p16c4ecjsnc910c7d96e73",
-//       "X-RapidAPI-Host": "api-nba-v1.p.rapidapi.com",
-//     },
-//   };
-
-//   try {
-//     const response = await axios.request(options);
-//     console.log(response.data);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
-
-// fetchNBAData();

@@ -13,9 +13,10 @@ import addWatchedMovie from "./controllers/addWatchedMovie.js";
 import removeWatchedMovie from "./controllers/removeWatchedMovie.js";
 import displayWatchedMovies from "./controllers/displayWatchedMovies.js";
 
-// import axios from "axios";
+// * DOTENV SETUP
 dotenv.config();
 
+// * KNEX SETUP
 const db = knex({
   client: "pg",
   connection: {

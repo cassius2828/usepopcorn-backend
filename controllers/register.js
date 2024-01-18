@@ -8,9 +8,7 @@ const handleRegister = (req, res, bcrypt, db) => {
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(password, salt);
 
-  //   const hash = bcrypt.genSalt(10, (err, salt) => {
-  //     bcrypt.hash(password, salt, (err, hash) => {});
-  //   });
+
   // transaction makes sure tables wont fall out of sync
   // if one is able to be updated and the other is not
   db.transaction((trx) => {

@@ -6,7 +6,6 @@ const fetchData = async (req, res) => {
 
   const data = await response.json();
   res.json(data);
-//   if (data.Response === "False") throw new Error("Movie not found");
 };
 
 export default fetchData;

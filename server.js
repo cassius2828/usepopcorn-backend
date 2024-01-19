@@ -12,6 +12,7 @@ import loadMovieDetails from "./controllers/movieDetails.js";
 import addWatchedMovie from "./controllers/addWatchedMovie.js";
 import removeWatchedMovie from "./controllers/removeWatchedMovie.js";
 import displayWatchedMovies from "./controllers/displayWatchedMovies.js";
+import sortWatchedMovies from "./controllers/sortWatchedMovies.js";
 
 // * DOTENV SETUP
 dotenv.config();
@@ -76,6 +77,11 @@ app.delete("/remove_watched_movie", (req, res) => {
 // * DISPLAY WATCHED MOVIE
 app.post("/display_watched_movies", (req, res) => {
   displayWatchedMovies(req, res, db);
+});
+
+ // * SORT WATCHED MOVIE
+app.put("/sort_watched_movies", (req, res) => {
+  sortWatchedMovies(req, res, db);
 });
 
 // * RUN SERVER

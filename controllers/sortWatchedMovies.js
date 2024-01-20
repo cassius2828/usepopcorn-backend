@@ -4,6 +4,7 @@ const sortWatchedMovies = async (req, res, db) => {
     db("watched_movies")
       .returning("*")
       .where("username", username)
+      .orderBy("time_added")
       .then((usersWatchedList) => {
         res.send(usersWatchedList);
       });

@@ -11,6 +11,14 @@ const addWatchedMovie = (req, res, db) => {
     year,
   } = req.body;
 
+  // // this solves the sorting issue when a user rating of 10 was placed lower than any other digits
+  // // this occured bc the values are strings so it is reading the first int seen as the rating
+  // // ex: 9 > 1 even though what I am putting is 10
+  // if(user_rating.length === 1) {
+  //   user_rating = "0" + user_rating
+  // }
+
+
   db("watched_movies")
     .insert({
       username: username,
